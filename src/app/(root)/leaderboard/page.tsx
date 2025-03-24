@@ -73,11 +73,26 @@ export default function Leaderboard() {
               </div>
             ) : (
               <table className="w-full">
-                <thead>
+                  <thead>
                   <tr className="bg-purple-900/30 border-b border-purple-500/30">
-                    <th className="px-6 py-4 text-left text-pink-400">Rank</th>
-                    <th className="px-6 py-4 text-left text-pink-400">Name</th>
-                    <th className="px-6 py-4 text-right text-pink-400">Score</th>
+                    <th className="px-6 py-4 text-left text-pink-400 font-bold text-lg">
+                      <span className="flex items-center gap-2">
+                        <span>#</span>
+                        <span className="text-gray-400 text-sm">Rank</span>
+                      </span>
+                    </th>
+                    <th className="px-6 py-4 text-left text-pink-400 font-bold text-lg">
+                      <span className="flex items-center gap-2">
+                        <span>🎭</span>
+                        <span>Roaster</span>
+                      </span>
+                    </th>
+                    <th className="px-6 py-4 text-right text-pink-400 font-bold text-lg">
+                      <span className="flex items-center justify-end gap-2">
+                        <span>Score</span>
+                        <span>🔥</span>
+                      </span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-purple-500/30">
@@ -96,19 +111,15 @@ export default function Leaderboard() {
                     </td>
                     <td className="px-6 py-4 font-medium">{entry.name}</td>
                     <td className="px-6 py-4 text-right">
-                      <span className="bg-purple-500/20 px-3 py-1 rounded-full">
-                        {entry.score.toFixed(2)}
-                      </span>
+                        <span className="bg-purple-500/20 px-3 py-1 rounded-full inline-block w-20 text-center">
+                        {entry.score}
+                        </span>
                     </td>
                   </tr>
                   ))}
                 </tbody>
               </table>
             )}
-          </div>
-
-          <div className="bg-black/30 rounded-xl border border-purple-500/30 overflow-hidden">
-            {/* ...existing leaderboard table code... */}
           </div>
 
           <div className="text-center mt-6 text-sm text-gray-400 italic">
