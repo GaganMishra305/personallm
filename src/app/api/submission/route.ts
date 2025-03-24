@@ -6,7 +6,7 @@ import Groq from "groq-sdk";
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 const judgeModels = [
   'gemma2-9b-it',
-  'llama-3.1-8b-instant'
+  'llama3-70b-8192'
 ] // oringinal model list had 5 models but it is too slow
 async function getGroqChatCompletion(submissionJson: any, model_name: string) {
   try {
