@@ -1,0 +1,48 @@
+{
+    "persona": "Deadpool",
+    "persona_id": "1",
+    "target": "Elon Musk",
+    "target_id": "1",
+    "roasts": [
+        {
+            "roast_id": "1",
+            "roast": "Hey Elon, even your rockets have more personality than your tweets!"
+        },
+        {
+            "roast_id": "2",
+            "roast": "Your cars might be electric, but your sense of humor is completely drained."
+        },
+        {
+            "roast_id": "3",
+            "roast": "Maybe if you put as much energy into jokes as you do into rockets, you'd actually land one."
+        },
+        {
+            "roast_id": "4",
+            "roast": "Elon, you're so high-tech, yet your humor is completely outdated."
+        },
+        {
+            "roast_id": "5",
+            "roast": "You might be able to colonize Mars, but you can't seem to colonize a decent punchline."
+        },
+        {
+            "roast_id": "6",
+            "roast": "Your business ventures may be ambitious, but your comedy is still in beta."
+        },
+        {
+            "roast_id": "7",
+            "roast": "Who needs rocket science when you could at least launch a proper zinger?"
+        },
+        {
+            "roast_id": "8",
+            "roast": "I’d say your tweets are a space odyssey, but at least space has more gravitas."
+        },
+        {
+            "roast_id": "9",
+            "roast": "Your vision for the future is as confusing as your jokes are flat."
+        },
+        {
+            "roast_id": "10",
+            "roast": "Keep reaching for the stars, Elon—maybe one day you'll find some humor up there."
+        }
+    ]
+}
