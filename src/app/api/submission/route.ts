@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { addSubmission, createOrUpdateUser } from "@/lib/stores";
+
+function judgeSubmission(submissionJson: any): number {
+  return 70.0;
+}
 
 export async function POST(request: Request) {
   try {
@@ -10,23 +13,37 @@ export async function POST(request: Request) {
     const notebookUrl = formData.get("notebookUrl") as string;
     const submission = formData.get("submission") as File;
 
-    // Validate all required fields
-    if (!name || !email || !notebookUrl || !submission) {
+    // Parse submission JSON
+    const submissionText = await submission.text();
+    const submissionJson = JSON.parse(submissionText);
+
+    // Create user if not exists
+    await createOrUpdateUser(name, email);
+
+    // Get current score for submission
+    const score = judgeSubmission(submissionJson);
+
+    // Try to add submission
+    const submissionSuccess = await addSubmission(
+      email,
+      submissionJson,
+      notebookUrl,
+      score
+    );
+
+    if (!submissionSuccess) {
       return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
+        { error: "Failed to process submission" },
+        { status: 500 }
       );
     }
 
-    // Read submission file
-    const submissionText = await submission.text();
-    
-    // You can add additional validations here
-    // Save to database or file system
-    // Send confirmation email
-    // etc.
+    return NextResponse.json({ 
+      success: true,
+      score: score,
+      message: "Submission processed successfully"
+    });
 
-    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Submission error:", error);
     return NextResponse.json(

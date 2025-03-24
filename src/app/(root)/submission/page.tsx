@@ -239,7 +239,7 @@ export default function Submission() {
               <div className="space-y-6 text-red-200">
                 <div className="flex items-start space-x-4 p-4 bg-black/20 rounded-xl">
                   <span className="text-2xl">🔒</span>
-                  <p className="text-left">Your Kaggle notebook <strong>must be public</strong>. Private notebooks will result in automatic disqualification.</p>
+                  <p className="text-left">Your Kaggle notebook <strong>must be public</strong>. Private notebooks will result in discarding of the result.</p>
                 </div>
                 <div className="flex items-start space-x-4 p-4 bg-black/20 rounded-xl">
                   <span className="text-2xl">⚡</span>

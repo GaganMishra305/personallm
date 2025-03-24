@@ -4,13 +4,10 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import Papa from 'papaparse';
 
 interface LeaderboardEntry {
-  Id: string;
-  Email: string;
-  Name: string;
-  Score: string;
+  name: string;
+  score: number;
 }
 
 export default function Leaderboard() {
@@ -20,20 +17,10 @@ export default function Leaderboard() {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch('/leaderboard.csv');
-        const csvText = await response.text();
-        Papa.parse(csvText, {
-          header: true,
-          complete: (results) => {
-            const sortedData = results.data
-              .filter((entry: LeaderboardEntry) => entry.Id && entry.Score)
-              .sort((a: LeaderboardEntry, b: LeaderboardEntry) => 
-                parseInt(b.Score) - parseInt(a.Score)
-              );
-            setLeaderboardData(sortedData);
-            setIsLoading(false);
-          },
-        });
+        const response = await fetch('/api/leaderboard');
+        const data = await response.json();
+        setLeaderboardData(data);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching leaderboard:', error);
         setIsLoading(false);
@@ -76,7 +63,7 @@ export default function Leaderboard() {
                   Be the first to enter the arena and show off your AI's roasting skills!
                 </p>
                 <Link 
-                  href="/about"
+                  href="/submission"
                   className="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-3 rounded-lg 
                            font-semibold hover:opacity-90 transform hover:scale-105 
                            transition duration-200 shadow-lg"
@@ -90,38 +77,44 @@ export default function Leaderboard() {
                   <tr className="bg-purple-900/30 border-b border-purple-500/30">
                     <th className="px-6 py-4 text-left text-pink-400">Rank</th>
                     <th className="px-6 py-4 text-left text-pink-400">Name</th>
-                    <th className="px-6 py-4 text-left text-pink-400 hidden md:table-cell">Email</th>
                     <th className="px-6 py-4 text-right text-pink-400">Score</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-purple-500/30">
                   {leaderboardData.map((entry, index) => (
                     <tr 
-                      key={entry.Id}
-                      className="hover:bg-purple-900/20 transition-colors duration-200"
-                    >
-                      <td className="px-6 py-4">
-                        {index + 1}
-                        {index < 3 && (
-                          <span className="ml-2">
-                            {index === 0 ? '👑' : index === 1 ? '🥈' : '🥉'}
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 font-medium">{entry.Name}</td>
-                      <td className="px-6 py-4 hidden md:table-cell text-gray-300">
-                        {entry.Email}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <span className="bg-purple-500/20 px-3 py-1 rounded-full">
-                          {entry.Score}
+                    key={index}
+                    className="hover:bg-purple-900/20 transition-colors duration-200"
+                  >
+                    <td className="px-6 py-4">
+                      {index + 1}
+                      {index < 3 && (
+                        <span className="ml-2">
+                          {index === 0 ? '👑' : index === 1 ? '🥈' : '🥉'}
                         </span>
-                      </td>
-                    </tr>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 font-medium">{entry.name}</td>
+                    <td className="px-6 py-4 text-right">
+                      <span className="bg-purple-500/20 px-3 py-1 rounded-full">
+                        {entry.score.toFixed(2)}
+                      </span>
+                    </td>
+                  </tr>
                   ))}
                 </tbody>
               </table>
             )}
+          </div>
+
+          <div className="bg-black/30 rounded-xl border border-purple-500/30 overflow-hidden">
+            {/* ...existing leaderboard table code... */}
+          </div>
+
+          <div className="text-center mt-6 text-sm text-gray-400 italic">
+            <p>Note: New submissions may take a few minutes to appear on the leaderboard while judging is in progress.</p>
+            <p>Please check back later to see updated rankings. </p>
+            <p>Only the best score would be reflected here.</p>
           </div>
         </div>
       </div>

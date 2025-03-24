@@ -7,28 +7,6 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function About() {
-  const [downloading, setDownloading] = useState<string | null>(null);
-
-  const handleDownload = async (fileType: string) => {
-    setDownloading(fileType);
-    try {
-      const response = await fetch(`/api/download?file=${fileType}`);
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileType === 'personas' ? 'personas_dataset.json' :
-                  fileType === 'sample' ? 'sample_submission.json' : 
-                  'starter_notebook.ipynb';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    } catch (error) {
-      console.error('Download failed:', error);
-    }
-    setDownloading(null);
-  };
-
   return (
     <div>
       <Navbar />
@@ -65,7 +43,7 @@ export default function About() {
                 </div>
 
                 <div className="bg-black/30 p-6 rounded-xl border border-purple-500/30">
-                  <h3 className="text-2xl font-semibold text-pink-400 mb-4">Kaggle Notebook Submission</h3>
+                  <h3 className="text-2xl font-semibold text-pink-400 mb-4">3. Kaggle Notebook Submission</h3>
                   <ul className="list-disc list-inside space-y-3 text-gray-300">
                     <li><span className="text-purple-300">Model development and tuning process</span> (fine-tuning, prompt engineering, dataset used)</li>
                     <li><span className="text-purple-300">Code implementation details</span> ensuring modularity, efficiency, and readability</li>
@@ -77,7 +55,7 @@ export default function About() {
             </section>
 
             <section id="scoring-criteria" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-semibold text-purple-400 mb-6">Scoring Criteria</h2>
+              <h2 className="text-3xl font-semibold text-purple-400 mb-6">4. Scoring Criteria</h2>
               <div className="bg-black/30 rounded-xl border border-purple-500/30 overflow-hidden">
                 <table className="w-full">
                   <thead className="border-b border-purple-500/30">
@@ -124,7 +102,7 @@ export default function About() {
             </section>
 
             <section id="competition-rules" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-semibold text-purple-400 mb-6">Competition Rules</h2>
+              <h2 className="text-3xl font-semibold text-purple-400 mb-6">5. Competition Rules</h2>
               <div className="bg-black/30 p-6 rounded-xl border border-purple-500/30">
                 <ul className="list-disc list-inside space-y-3 text-gray-300">
                   <li><span className="text-purple-300">Solo Participation</span> – Only one participant per team</li>
@@ -137,7 +115,7 @@ export default function About() {
             </section>
 
             <section id="technical-requirements" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-semibold text-purple-400 mb-6">Technical Requirements</h2>
+              <h2 className="text-3xl font-semibold text-purple-400 mb-6">6. Technical Requirements</h2>
               <div className="bg-black/30 p-6 rounded-xl border border-purple-500/30">
                 <ul className="list-disc list-inside space-y-3 text-gray-300">
                   <li>Use <span className="text-purple-300">any finetuning framework</span> with an LLM (GPT-4, LLaMA, or Mistral)</li>
@@ -148,7 +126,7 @@ export default function About() {
             </section>
 
         <section id="resources" className="mb-16 scroll-mt-20">
-        <h2 className="text-3xl font-semibold text-purple-400 mb-6">Resources</h2>
+        <h2 className="text-3xl font-semibold text-purple-400 mb-6">7. Resources</h2>
         <div className="grid md:grid-cols-3 gap-6">
           <Link 
             href="/files/personas_dataset.json" 
